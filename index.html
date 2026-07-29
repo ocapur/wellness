@@ -96,7 +96,14 @@
     <div class="day strength" data-d="2"><div class="dchip">MAR</div><div class="dbody"><div class="dtitle">Strength · HOME</div><div class="dsub">Dumbbells · 25 min</div></div></div>
     <div class="day" data-d="3"><div class="dchip">MIÉ</div><div class="dbody"><div class="dtitle">Run · Chapultepec</div><div class="dsub">Z2 + meditar 20 min</div></div></div>
     <div class="day strength" data-d="4"><div class="dchip">JUE</div><div class="dbody"><div class="dtitle">Strength · PARK</div><div class="dsub">Llegas corriendo · bodyweight</div></div></div>
-    <div class="day" data-d="5"><div class="dchip">VIE</div><div class="dbody"><div class="dtitle">Run · Intervals</div><div class="dsub">VO2max · 6× (1min fuerte / 2min suave) · meditar al final</div></div></div>
+    <div class="day" data-d="5" id="vie" style="cursor:pointer;flex-wrap:wrap;"><div class="dchip">VIE</div><div class="dbody"><div class="dtitle">Run · Intervals <span style="color:#5A6472;font-size:12px;">▾ toca</span></div><div class="dsub">VO2max · ~33 min total · meditar al final</div></div>
+      <div id="vie-detail" style="display:none;flex-basis:100%;margin-top:10px;padding:12px 14px;background:#0E1014;border-radius:12px;font-size:12.5px;line-height:1.7;color:#D5DAE1;">
+        <b style="color:#C6F135;">Cómo funciona (33 min):</b><br>
+        ① <b>10 min</b> trote fácil — calentar<br>
+        ② <b>18 min</b> — el corazón: <b>6 rondas</b> de [<span style="color:#C6F135;">1 min FUERTE</span> (8-9/10, no puedes hablar) + <span style="color:#6FB4FF;">2 min suave</span> (trote de recuperación)]<br>
+        ③ <b>5 min</b> trote suave — enfriar<br>
+        <span style="color:#8B95A3;">El 1 min fuerte es lo que sube tu VO2max. Los 2 suaves NO son caminar — trote lento.</span>
+      </div></div>
     <div class="day" data-d="6"><div class="dchip">SÁB</div><div class="dbody"><div class="dtitle">Long run · Z2</div><div class="dsub">6 km+ fácil</div></div></div>
     <div class="day rest" data-d="0"><div class="dchip">DOM</div><div class="dbody"><div class="dtitle">Rest + Mobility</div><div class="dsub">Recuperación activa</div></div></div>
   </div>
@@ -212,6 +219,10 @@ const el = document.querySelector(`.day[data-d="${dow}"]`);
 if(el){ el.classList.add('today'); }
 // Tag en la sección del día
 if(dow===4) document.getElementById('tag-park').innerHTML=' <span style="color:#C6F135;">· HOY</span>';
+document.getElementById('vie').addEventListener('click',()=>{
+  const d=document.getElementById('vie-detail');
+  d.style.display = d.style.display==='none' ? 'block' : 'none';
+});
 if(dow===2) document.getElementById('tag-home').innerHTML=' <span style="color:#C6F135;">· HOY</span>';
 </script>
 </body>
