@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wellness OS · Omar</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Archivo:wght@700;800;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  body { background:#08090B; font-family:'Inter',sans-serif; color:#EDEFF2; padding:0 0 70px; }
+  .wrap { max-width:560px; margin:0 auto; padding:0 16px; }
+
+  header { padding:34px 6px 22px; }
+  header .k { font-size:11px; letter-spacing:3px; color:#9AA3B0; font-weight:700; text-transform:uppercase; }
+  header h1 { font-family:'Archivo',sans-serif; font-size:38px; font-weight:900; line-height:1; margin:8px 0 10px; letter-spacing:-1.5px; }
+  header h1 span { color:#C6F135; }
+  header .tag { display:inline-block; font-size:12px; font-weight:700; color:#08090B; background:#C6F135; padding:5px 12px; border-radius:20px; }
+
+  .glabel { font-size:11px; letter-spacing:2.5px; color:#7C8595; font-weight:800; text-transform:uppercase; padding:26px 6px 12px; display:flex; align-items:center; gap:9px; }
+  .glabel .d { width:8px; height:8px; border-radius:50%; background:#C6F135; }
+
+  /* WEEK */
+  .day {
+    display:flex; align-items:center; gap:13px;
+    padding:12px 12px; border-radius:14px;
+    border:1px solid transparent; margin-bottom:4px;
+  }
+  .day.today {
+    background:#161B10; border-color:#C6F135;
+    box-shadow:0 0 0 1px #C6F13533;
+  }
+  .day.today .dtitle::after { content:" · HOY"; color:#C6F135; font-size:11px; letter-spacing:1px; }
+  .dchip {
+    width:42px; height:42px; flex-shrink:0; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:12px;
+    background:#181C23; color:#C6F135;
+  }
+  .day.strength .dchip { background:#C6F135; color:#08090B; }
+  .day.rest .dchip { color:#5A6472; }
+  .dbody { flex:1; }
+  .dtitle { font-size:14px; font-weight:800; line-height:1.15; }
+  .dsub { font-size:11.5px; color:#8B95A3; margin-top:2px; }
+
+  .note { padding:10px 8px 0; font-size:11px; color:#7C8595; font-weight:600; line-height:1.5; }
+  .note b { color:#C6F135; }
+
+  /* DAILY TILES */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:0 2px; }
+  .tile { background:#12151A; border:1px solid #1C2028; border-radius:14px; padding:13px 14px; }
+  .tile .t-big { font-family:'Archivo',sans-serif; font-size:19px; font-weight:900; color:#C6F135; display:block; }
+  .tile .t-lbl { font-size:11px; color:#9AA3B0; font-weight:600; line-height:1.25; }
+
+  /* EXERCISES */
+  .ex { background:#12151A; border:1px solid #1C2028; border-radius:16px; margin-bottom:10px; overflow:hidden; }
+  .ex.open { border-color:#C6F135; }
+  .head-row { display:flex; align-items:center; gap:12px; padding:15px 16px; cursor:pointer; user-select:none; }
+  .head-row .nm { flex:1; font-size:15.5px; font-weight:800; }
+  .head-row .st { font-size:12px; font-weight:800; color:#C6F135; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .head-row .chev { color:#5A6472; transition:transform .25s; font-size:17px; }
+  .ex.open .chev { transform:rotate(90deg); color:#C6F135; }
+  .body { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .ex.open .body { max-height:640px; }
+  .body-in { padding:0 17px 17px; }
+  .how { font-size:13.5px; line-height:1.55; color:#D5DAE1; }
+  .how b { color:#fff; }
+  .dd { display:flex; gap:8px; margin-top:11px; }
+  .dd > div { flex:1; border-radius:10px; padding:10px 11px; font-size:12px; line-height:1.45; }
+  .do { background:#141A0C; border-left:3px solid #C6F135; color:#C6D89A; }
+  .dont { background:#1C1210; border-left:3px solid #E08A7A; color:#E0A79C; }
+  .dd b { display:block; margin-bottom:3px; font-size:10px; letter-spacing:1.2px; text-transform:uppercase; }
+  .do b { color:#C6F135; } .dont b { color:#E08A7A; }
+  .demo {
+    display:inline-flex; align-items:center; gap:7px; margin-top:12px;
+    background:#1A1F27; border:1px solid #2A3038; color:#EDEFF2;
+    padding:9px 14px; border-radius:10px; font-size:12.5px; font-weight:700;
+    text-decoration:none;
+  }
+  .demo:active { background:#232933; }
+  .demo .play { color:#C6F135; }
+
+  footer { text-align:center; margin-top:36px; font-size:11px; color:#5A6472; letter-spacing:.5px; line-height:1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="k">Sistema · No dieta</div>
+    <h1>WELLNESS <span>OS</span></h1>
+    <div class="tag">Constancia &gt; Intensidad</div>
+  </header>
+
+  <div class="glabel"><span class="d"></span>Semana</div>
+  <div id="week">
+    <div class="day" data-d="1"><div class="dchip">LUN</div><div class="dbody"><div class="dtitle">Run · Z2 easy</div><div class="dsub">3km + meditar 20min + 3km · ritmo conversación</div></div></div>
+    <div class="day strength" data-d="2"><div class="dchip">MAR</div><div class="dbody"><div class="dtitle">Strength · HOME</div><div class="dsub">Dumbbells · 25 min</div></div></div>
+    <div class="day" data-d="3"><div class="dchip">MIÉ</div><div class="dbody"><div class="dtitle">Run · Chapultepec</div><div class="dsub">Z2 + meditar 20 min</div></div></div>
+    <div class="day strength" data-d="4"><div class="dchip">JUE</div><div class="dbody"><div class="dtitle">Strength · PARK</div><div class="dsub">Llegas corriendo · bodyweight</div></div></div>
+    <div class="day" data-d="5"><div class="dchip">VIE</div><div class="dbody"><div class="dtitle">Run · Intervals</div><div class="dsub">VO2max · 6× (1min fuerte / 2min suave) · meditar al final</div></div></div>
+    <div class="day" data-d="6"><div class="dchip">SÁB</div><div class="dbody"><div class="dtitle">Long run · Z2</div><div class="dsub">6 km+ fácil</div></div></div>
+    <div class="day rest" data-d="0"><div class="dchip">DOM</div><div class="dbody"><div class="dtitle">Rest + Mobility</div><div class="dsub">Recuperación activa</div></div></div>
+  </div>
+  <div class="note"><b>Ritmo Z2</b> = hablar oraciones completas (~7:00/km). Solo viernes va rápido.</div>
+
+  <div class="glabel"><span class="d"></span>Diario · no-negociable</div>
+  <div class="grid">
+    <div class="tile"><span class="t-big">30</span><span class="t-lbl">Push-ups</span></div>
+    <div class="tile"><span class="t-big">10 g</span><span class="t-lbl">Creatine · músculo + cerebro</span></div>
+    <div class="tile"><span class="t-big">2-3′</span><span class="t-lbl">Mobility · regada en el día</span></div>
+    <div class="tile"><span class="t-big">2.5 L</span><span class="t-lbl">Agua</span></div>
+  </div>
+
+  <div class="glabel"><span class="d"></span>Park Day · bodyweight <span id="tag-park"></span></div>
+  <div id="g-park"></div>
+
+  <div class="glabel"><span class="d"></span>Home Day · dumbbells <span id="tag-home"></span></div>
+  <div id="g-home"></div>
+
+  <div class="glabel"><span class="d"></span>Mobility · movement snacks</div>
+  <div class="note" style="padding-top:0;padding-bottom:10px;">Riégalos en el día, no en sesión. Deep squat viendo el cel · 90/90 al terminar de correr.</div>
+  <div id="g-mob"></div>
+
+  <div class="glabel"><span class="d"></span>Nutrición · sistema</div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">⏱️ <b style="color:#fff;">Ayuno 16:8</b> — ventana <b style="color:#C6F135;">2pm→8pm</b> · café solo AM</span></div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🥩 <b style="color:#C6F135;">170g proteína/día</b> · proteína primero en cada comida</span></div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍽️ Plato: palma proteína · puño verduras · pulgar grasas · carbs post-entreno</span></div>
+  <div class="tile"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍷 Finde: <b style="color:#fff;">1 comida libre, no finde libre</b> · alcohol tope 2-3</span></div>
+
+  <footer>Sueño 7-8h = el multiplicador de todo.<br>Wellness OS v2 · capur</footer>
+</div>
+
+<script>
+const EX = {
+  park: [
+    { n:"Pull-ups", s:"4 × max", yt:"pull up proper form",
+      how:"Cuelga de la barra, manos al ancho de hombros. <b>Jala hasta que la barbilla pase la barra.</b> Baja controlado hasta estirar brazos.",
+      do_:"Jala la barra hacia tu pecho. Escápulas abajo primero.", dont:"Balancearte (kipping) o medias reps sin estirar abajo." },
+    { n:"Push-ups", s:"4 × max", yt:"push up proper form",
+      how:"Cuerpo recto como tabla. Manos bajo hombros, codos ~45°. <b>Pecho casi al piso</b> y empuja.",
+      do_:"Core y glúteo apretados. Puente rígido.", dont:"Cadera hundida o pompis arriba. Codos abiertos 90°." },
+    { n:"Dips", s:"4 × max", yt:"parallel bar dips form",
+      how:"Entre dos tubos, brazos estirados. <b>Baja doblando codos a ~90°</b>, leve inclinación al frente. Empuja.",
+      do_:"Codos apuntando atrás. Hombros lejos de las orejas.", dont:"Bajar de más (dolor de hombro) o encoger hombros." },
+    { n:"Reverse lunges", s:"4 × 12 / side", yt:"reverse lunge form",
+      how:"<b>Paso hacia atrás</b>, rodilla trasera casi al piso. Regresa empujando con el talón de adelante.",
+      do_:"Torso derecho. Empuja con el talón delantero.", dont:"Rodilla delantera colapsando hacia adentro." },
+    { n:"Plank", s:"3 × 30-45s", yt:"forearm plank proper form",
+      how:"Antebrazos + puntas de pies. <b>Cuerpo recto</b>, core y glúteo apretados. Sostén.",
+      do_:"Respira normal. Línea recta cabeza-talón.", dont:"Aguantar el aire. Cadera caída o arqueada." },
+    { n:"Hollow hold", s:"3 × 20-30s", yt:"hollow body hold tutorial",
+      how:"Boca arriba. <b>Espalda baja clavada al piso</b>, hombros y piernas levantados. Forma de banana.",
+      do_:"Lumbar pegada al piso SIEMPRE. Si cuesta, dobla rodillas.", dont:"Despegar la espalda baja — pierde todo el punto." }
+  ],
+  home: [
+    { n:"Goblet squat", s:"4 × 10", yt:"goblet squat proper form",
+      how:"Mancuerna al pecho con ambas manos. <b>Sentadilla profunda</b>, bajada 3 seg, talones al piso.",
+      do_:"Pecho arriba, rodillas hacia afuera.", dont:"Talones despegados o espalda redondeada." },
+    { n:"Dumbbell row", s:"4 × 12 / arm", yt:"one arm dumbbell row form",
+      how:"Rodilla y mano en banco/silla, espalda plana como mesa. <b>Jala al bolsillo trasero, codo pegado</b>, aprieta omóplato.",
+      do_:"Jala con el codo, no con la mano. Espalda plana.", dont:"Encorvar espalda o rotar el torso al jalar." },
+    { n:"Romanian deadlift", s:"4 × 12", yt:"dumbbell romanian deadlift form",
+      how:"De pie, mancuernas al frente. <b>Bisagra: pompis atrás</b>, mancuernas pegadas a las piernas. Sube apretando glúteo.",
+      do_:"Siente el estirón en isquiotibiales. Espalda recta.", dont:"Convertirla en sentadilla o redondear lumbar." },
+    { n:"Shoulder press", s:"4 × 10", yt:"dumbbell shoulder press form",
+      how:"Mancuernas a los hombros. <b>Empuja recto arriba</b> hasta estirar. Baja controlado.",
+      do_:"Aprieta glúteo para proteger lumbar.", dont:"Arquear la espalda baja al empujar." },
+    { n:"Farmer carry", s:"3 × 40 m", yt:"farmer carry proper form",
+      how:"Una mancuerna en cada mano. <b>Camina recto, hombros atrás, core apretado.</b> 40m ida y vuelta.",
+      do_:"Camina como soldado. Agarre firme.", dont:"Encoger hombros o inclinarte a un lado." }
+  ],
+  mob: [
+    { n:"Deep squat hold", s:"2 min", yt:"deep squat hold mobility",
+      how:"<b>Sentadilla profunda, pompis abajo</b>, talones clavados. Quédate ahí. Como niño jugando en el piso.",
+      do_:"Talones al piso. Hazlo viendo el cel.", dont:"Forzar si duele la rodilla — sube el rango gradual." },
+    { n:"90/90 hips", s:"8 rotaciones", yt:"90 90 hip switch mobility",
+      how:"Sentado: pierna adelante 90°, la otra al lado 90°. <b>Rota de lado a lado sin manos.</b>",
+      do_:"Lento y controlado. Es rotación de cadera pura.", dont:"Usar las manos para impulsarte." },
+    { n:"Cossack squat", s:"6 / side", yt:"cossack squat mobility",
+      how:"<b>Sentadilla lateral:</b> baja sobre una pierna, la otra estirada con la planta arriba. Alterna.",
+      do_:"Patinador estirándose. Baja solo hasta donde controles.", dont:"Rebotar en el fondo o colapsar la rodilla." },
+    { n:"Sit-to-rise practice", s:"5 reps", yt:"sit to rise test practice",
+      how:"<b>Siéntate al piso y levántate con el menor apoyo posible</b> — ideal sin manos ni rodillas.",
+      do_:"Cruza los pies, baja con control. Practica el patrón.", dont:"Dejarte caer. Es control, no velocidad." }
+  ]
+};
+
+function card(e){
+  const q = encodeURIComponent(e.yt);
+  return `<div class="ex">
+    <div class="head-row"><span class="nm">${e.n}</span><span class="st">${e.s}</span><span class="chev">›</span></div>
+    <div class="body"><div class="body-in">
+      <div class="how">${e.how}</div>
+      <div class="dd">
+        <div class="do"><b>Do</b>${e.do_}</div>
+        <div class="dont"><b>Don't</b>${e.dont}</div>
+      </div>
+      <a class="demo" href="https://www.youtube.com/results?search_query=${q}" target="_blank" rel="noopener"><span class="play">▶</span> Ver demo en video</a>
+    </div></div>
+  </div>`;
+}
+document.getElementById('g-park').innerHTML = EX.park.map(card).join('');
+document.getElementById('g-home').innerHTML = EX.home.map(card).join('');
+document.getElementById('g-mob').innerHTML  = EX.mob.map(card).join('');
+
+document.querySelectorAll('.ex .head-row').forEach(h=>{
+  h.addEventListener('click',()=>h.parentElement.classList.toggle('open'));
+});
+
+// Highlight HOY (hora CDMX)
+const dow = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Mexico_City'})).getDay();
+const el = document.querySelector(`.day[data-d="${dow}"]`);
+if(el){ el.classList.add('today'); }
+// Tag en la sección del día
+if(dow===4) document.getElementById('tag-park').innerHTML=' <span style="color:#C6F135;">· HOY</span>';
+if(dow===2) document.getElementById('tag-home').innerHTML=' <span style="color:#C6F135;">· HOY</span>';
+</script>
+</body>
+</html>
