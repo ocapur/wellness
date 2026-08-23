@@ -122,6 +122,7 @@
   <div id="g-park"></div>
 
   <div class="glabel"><span class="d"></span>Home Day · dumbbells <span id="tag-home"></span></div>
+  <div class="note" style="padding-top:0;padding-bottom:10px;"><b>Regla "2 de sobra":</b> si terminas todas las series con 2+ reps en el tanque, 2 entrenos seguidos → sube peso mínimo incremento. Farmer carry: sube si aguantas 50s+ fácil.</div>
   <div id="g-home"></div>
 
   <div class="glabel"><span class="d"></span>Mobility · movement snacks</div>
@@ -140,9 +141,9 @@
 <script>
 const EX = {
   park: [
-    { n:"Pull-ups", s:"4 × max", yt:"pull up proper form",
-      how:"Cuelga de la barra, manos al ancho de hombros. <b>Jala hasta que la barbilla pase la barra.</b> Baja controlado hasta estirar brazos.",
-      do_:"Jala la barra hacia tu pecho. Escápulas abajo primero.", dont:"Balancearte (kipping) o medias reps sin estirar abajo." },
+    { n:"Pull-ups", s:"4 × max + 3 negativas", yt:"pull up negatives tutorial",
+      how:"Cuelga de la barra, manos al ancho de hombros. <b>Jala hasta que la barbilla pase la barra.</b> Baja controlado hasta estirar brazos. <b>Tras la última serie: 3 negativas</b> — salta arriba, baja en 5 segundos. Así rompes el techo de reps.",
+      do_:"Jala la barra hacia tu pecho. Negativas lentas y controladas.", dont:"Balancearte (kipping) o bajar rápido en la negativa." },
     { n:"Push-ups", s:"4 × max", yt:"push up proper form",
       how:"Cuerpo recto como tabla. Manos bajo hombros, codos ~45°. <b>Pecho casi al piso</b> y empuja.",
       do_:"Core y glúteo apretados. Puente rígido.", dont:"Cadera hundida o pompis arriba. Codos abiertos 90°." },
@@ -175,14 +176,14 @@ const EX = {
     { n:"Shoulder press", s:"4 × 10", yt:"dumbbell shoulder press form",
       how:"Mancuernas a los hombros. <b>Empuja recto arriba</b> hasta estirar. Baja controlado.",
       do_:"Aprieta glúteo para proteger lumbar.", dont:"Arquear la espalda baja al empujar." },
-    { n:"Farmer carry", s:"3 × 35s", yt:"farmer carry proper form",
-      how:"Una mancuerna en cada mano. <b>Camina recto, hombros atrás, core apretado.</b> 35s por el pasillo, ida y vuelta las veces que sea.",
-      do_:"Camina como soldado. Agarre firme. Si a los 35s no arde el agarre → sube peso.", dont:"Encoger hombros o inclinarte a un lado." }
+    { n:"Farmer carry", s:"3 × 35-40s", yt:"farmer carry proper form",
+      how:"Una mancuerna en cada mano. <b>Camina recto, hombros atrás, core apretado.</b> 35-40s por el pasillo, ida y vuelta las veces que sea.",
+      do_:"Sube peso hasta que el agarre arda a los 35-40s. Si aguantas 50s+ fácil, vas ligero.", dont:"Encoger hombros o inclinarte a un lado." }
   ],
   mob: [
     { n:"Deep squat hold", s:"2 min", yt:"deep squat hold mobility",
-      how:"<b>Sentadilla profunda, pompis abajo</b>, talones clavados. Quédate ahí. Como niño jugando en el piso.",
-      do_:"Talones al piso. Hazlo viendo el cel.", dont:"Forzar si duele la rodilla — sube el rango gradual." },
+      how:"<b>Sentadilla profunda, pompis abajo</b>, talones clavados. Quédate ahí. Como niño jugando en el piso. Si se siente pesado a los 2 min — <b>va bien, es la señal correcta.</b>",
+      do_:"Talones al piso. Hazlo viendo el cel. Sufrirlo = está funcionando.", dont:"Forzar si duele la rodilla (dolor articular ≠ incomodidad muscular)." },
     { n:"90/90 hips", s:"8 rotaciones", yt:"90 90 hip switch mobility",
       how:"Sentado: pierna adelante 90°, la otra al lado 90°. <b>Rota de lado a lado sin manos.</b>",
       do_:"Lento y controlado. Es rotación de cadera pura.", dont:"Usar las manos para impulsarte." },
@@ -190,8 +191,8 @@ const EX = {
       how:"<b>Sentadilla lateral:</b> baja sobre una pierna, la otra estirada con la planta arriba. Alterna.",
       do_:"Patinador estirándose. Baja solo hasta donde controles.", dont:"Rebotar en el fondo o colapsar la rodilla." },
     { n:"Sit-to-rise practice", s:"5 reps", yt:"sit to rise test practice",
-      how:"<b>Siéntate al piso y levántate con el menor apoyo posible</b> — ideal sin manos ni rodillas.",
-      do_:"Cruza los pies, baja con control. Practica el patrón.", dont:"Dejarte caer. Es control, no velocidad." }
+      how:"<b>Siéntate al piso y levántate con el menor apoyo posible.</b> Progresión: <b>① 1 mano apoyada ×5 → ② solo dedos ×5 → ③ sin nada.</b> Sube de nivel cuando el actual salga fácil, no antes.",
+      do_:"Cruza los pies, baja con control. Escalones, no salto de nivel.", dont:"Dejarte caer. Forzar nivel 3 sin dominar el 1." }
   ]
 };
 
