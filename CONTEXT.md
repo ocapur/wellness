@@ -69,6 +69,13 @@ Sistema de ejercicio + nutrición de Omar. Meta: constancia > intensidad, de por
 
 ## Log de ajustes (más reciente arriba)
 
+**Sep 2026 — Modo Viaje (Italia 10-21 sept, regifest.capur.co):**
+- Viaje familiar 3 semanas: Roma → Villa Toscana → Florencia → Milán. Familia grande, hija de 7 meses, agenda de tours apretada. Sin pesas, sin barras/tubos confirmados.
+- Filosofía: "volver igual, no peor" — no aplica sistema completo, no hay culpa.
+- Toggle **✈️ Modo Viaje** en la página (botón arriba, persiste en localStorage): cambia Strength a 100% bodyweight (push-ups variados, jump squats, lunges, plank/hollow, dips en silla), Run pasa a oportunista sin calendario fijo, nutrición se relaja (proteína primero cuando se puede elegir, 1 gelato/día, sin meta estricta de 170g).
+- Diario (push-ups, creatina, mobility) se mantiene igual — es lo único que no requiere equipo ni agenda.
+- Al volver: retomar sistema completo tal cual, sin rampa de reentrada — 3 semanas con push-ups diarios + bodyweight no genera pérdida real de músculo.
+
 **Ago 2026 — retro mes 1:**
 - Corriendo 7-8km por sesión (arriba del plan original 4-6km), viernes ~6km con sprints. On track, ningún ajuste al volumen aún — vigilar sueño.
 - Park: pull-ups tope en 5, dips 6-7, push-ups fatiga notoria (40→15). → Agregadas 3 negativas post-serie en pull-ups para romper techo.
