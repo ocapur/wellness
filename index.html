@@ -88,8 +88,40 @@
     <div class="k">Sistema · No dieta</div>
     <h1>WELLNESS <span>OS</span></h1>
     <div class="tag">Constancia &gt; Intensidad</div>
+    <div id="travel-toggle" style="margin-top:14px;">
+      <button id="btn-travel" onclick="toggleTravel()" style="background:#1A1F27;border:1px solid #2A3038;color:#EDEFF2;padding:9px 16px;border-radius:10px;font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer;">✈️ Modo Viaje</button>
+    </div>
   </header>
 
+  <div id="travel-mode" style="display:none;">
+
+  <div class="glabel"><span class="d"></span>Filosofía · modo viaje</div>
+  <div class="note" style="padding-top:0;padding-bottom:14px;">Meta: <b>volver igual, no peor.</b> Cero culpa por no cumplir el sistema exacto. Correr y push-ups se adaptan solos. Fuerza pasa a 100% bodyweight, 15 min, cuarto de hotel.</div>
+
+  <div class="glabel"><span class="d"></span>Diario · no-negociable (viaja igual)</div>
+  <div class="grid">
+    <div class="tile"><span class="t-big">30</span><span class="t-lbl">Push-ups</span></div>
+    <div class="tile"><span class="t-big">10 g</span><span class="t-lbl">Creatine · en la maleta</span></div>
+    <div class="tile"><span class="t-big">2-3′</span><span class="t-lbl">Mobility · en el cuarto</span></div>
+    <div class="tile"><span class="t-big">💧</span><span class="t-lbl">Agua · ojo con vuelos/vino</span></div>
+  </div>
+
+  <div class="glabel"><span class="d"></span>Run · oportunista</div>
+  <div class="note" style="padding-top:0;padding-bottom:10px;">No hay calendario fijo — <b>sales cuando hay ventana</b>, antes que despierte el grupo. 20-30 min, ritmo Z2 (hablar oraciones completas). Ciudades caminables: Roma, villa, Florencia, Milán — todas corribles.</div>
+
+  <div class="glabel"><span class="d"></span>Strength · bodyweight, cuarto de hotel</div>
+  <div class="note" style="padding-top:0;padding-bottom:10px;"><b>2-3× por semana</b>, no 2 fijos — la agenda decide el día. 15 min, sin equipo.</div>
+  <div id="g-travel"></div>
+
+  <div class="glabel"><span class="d"></span>Nutrición · versión relajada</div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍷 Vino, pasta, gelato 3 semanas = normal. <b style="color:#fff;">No luches contra Italia.</b></span></div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">⏱️ <b style="color:#C6F135;">Ayuno 16:8 si calza</b> — tours empiezan tarde, mantenlo si puedes.</span></div>
+  <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🥩 Única regla: <b style="color:#fff;">proteína primero</b> cuando eliges (bistecca > solo pasta).</span></div>
+  <div class="tile"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍨 <b style="color:#C6F135;">1 gelato al día</b> sin culpa, no ilimitado.</span></div>
+
+  </div><!-- /travel-mode -->
+
+  <div id="normal-mode">
   <div class="glabel"><span class="d"></span>Semana</div>
   <div id="week">
     <div class="day" data-d="1"><div class="dchip">LUN</div><div class="dbody"><div class="dtitle">Run · Z2 easy</div><div class="dsub">3km + meditar 20min + 3km · ritmo conversación</div></div></div>
@@ -134,6 +166,8 @@
   <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🥩 <b style="color:#C6F135;">170g proteína/día</b> · proteína primero en cada comida</span></div>
   <div class="tile" style="margin-bottom:8px;"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍽️ Plato: palma proteína · puño verduras · pulgar grasas · carbs post-entreno</span></div>
   <div class="tile"><span class="t-lbl" style="font-size:12.5px;color:#D5DAE1;">🍷 Finde: <b style="color:#fff;">1 comida libre, no finde libre</b> · alcohol tope 2-3</span></div>
+
+  </div><!-- /normal-mode -->
 
   <footer>Sueño 7-8h = el multiplicador de todo.<br>Wellness OS v2 · capur</footer>
 </div>
@@ -180,6 +214,26 @@ const EX = {
       how:"Una mancuerna en cada mano. <b>Camina recto, hombros atrás, core apretado.</b> 35-40s por el pasillo, ida y vuelta las veces que sea.",
       do_:"Sube peso hasta que el agarre arda a los 35-40s. Si aguantas 50s+ fácil, vas ligero.", dont:"Encoger hombros o inclinarte a un lado." }
   ],
+  travel: [
+    { n:"Push-ups variados", s:"4 × max", yt:"push up variations",
+      how:"Normal, luego <b>diamante</b> (manos juntas, más tríceps), luego <b>pike</b> (cadera arriba, más hombro). Rota entre las 3 variantes por serie.",
+      do_:"Cambia variante cada serie para trabajar distinto ángulo.", dont:"Repetir siempre la misma — te estancas más rápido." },
+    { n:"Bodyweight squats + jump squats", s:"4 × 15", yt:"jump squat form",
+      how:"12 squats normales + <b>3 jump squats explosivos</b> al final de cada serie. El salto agrega potencia que las mancuernas no imitan.",
+      do_:"Aterriza suave, rodillas suaves.", dont:"Aterrizar con rodillas rígidas — impacto directo a la articulación." },
+    { n:"Lunges", s:"4 × 12 / side", yt:"lunge form",
+      how:"Paso al frente, baja hasta rodilla trasera casi al piso. Alterna piernas.",
+      do_:"Torso derecho, rodilla delantera sobre el tobillo.", dont:"Rodilla delantera pasando mucho la punta del pie." },
+    { n:"Plank", s:"3 × 30-45s", yt:"forearm plank proper form",
+      how:"Antebrazos + puntas de pies. Cuerpo recto como tabla.",
+      do_:"Respira normal, línea recta.", dont:"Cadera caída o arqueada." },
+    { n:"Hollow hold", s:"3 × 20-30s", yt:"hollow body hold tutorial",
+      how:"Boca arriba, espalda baja clavada al piso, hombros y piernas levantados.",
+      do_:"Lumbar pegada al piso siempre.", dont:"Despegar la espalda baja." },
+    { n:"Dips en cama/silla", s:"4 × max", yt:"chair tricep dips form",
+      how:"Manos en el borde de la cama o silla firme, piernas extendidas al frente. <b>Baja doblando codos a 90°</b>, empuja de vuelta.",
+      do_:"Codos apuntando atrás, hombros lejos de las orejas.", dont:"Usar una silla que se mueva o sea inestable." }
+  ],
   mob: [
     { n:"Deep squat hold", s:"2 min", yt:"deep squat hold mobility",
       how:"<b>Sentadilla profunda, pompis abajo</b>, talones clavados. Quédate ahí. Como niño jugando en el piso. Si se siente pesado a los 2 min — <b>va bien, es la señal correcta.</b>",
@@ -213,6 +267,7 @@ function card(e){
 document.getElementById('g-park').innerHTML = EX.park.map(card).join('');
 document.getElementById('g-home').innerHTML = EX.home.map(card).join('');
 document.getElementById('g-mob').innerHTML  = EX.mob.map(card).join('');
+document.getElementById('g-travel').innerHTML = EX.travel.map(card).join('');
 
 document.querySelectorAll('.ex .head-row').forEach(h=>{
   h.addEventListener('click',()=>h.parentElement.classList.toggle('open'));
@@ -229,6 +284,23 @@ document.getElementById('vie').addEventListener('click',()=>{
   d.style.display = d.style.display==='none' ? 'block' : 'none';
 });
 if(dow===2) document.getElementById('tag-home').innerHTML=' <span style="color:#C6F135;">· HOY</span>';
+
+function toggleTravel(){
+  const t = document.getElementById('travel-mode');
+  const n = document.getElementById('normal-mode');
+  const btn = document.getElementById('btn-travel');
+  const isTravel = t.style.display !== 'none';
+  if(isTravel){
+    t.style.display='none'; n.style.display='block';
+    btn.textContent='✈️ Modo Viaje'; btn.style.background='#1A1F27'; btn.style.borderColor='#2A3038';
+    localStorage.setItem('wellness_mode','normal');
+  } else {
+    t.style.display='block'; n.style.display='none';
+    btn.textContent='🏠 Volver a rutina normal'; btn.style.background='#161B10'; btn.style.borderColor='#C6F135';
+    localStorage.setItem('wellness_mode','travel');
+  }
+}
+if(localStorage.getItem('wellness_mode')==='travel'){ toggleTravel(); }
 </script>
 </body>
 </html>
